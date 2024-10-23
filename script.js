@@ -257,6 +257,20 @@ clearChatButton.addEventListener('click', () => {
     }
 });
 
+function updateGreeting() {
+    const hour = new Date().getHours();
+    const greetingElement = document.getElementById("greeting");
+    if (hour < 12) {
+        greetingElement.textContent = "Good Morning!";
+    } else if (hour < 18) {
+        greetingElement.textContent = "Good Afternoon!";
+    } else {
+        greetingElement.textContent = "Good Evening!";
+    }
+}
+
+updateGreeting();
+
 // Handle click on suggestion items
 suggestionItems.forEach(suggestion => {
     suggestion.addEventListener('click', () => {
