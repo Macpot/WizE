@@ -422,6 +422,7 @@ code{
     margin-top: 30px;
     border-radius: 5px;
     color: inherit;
+    font-family: inherit;
 }
 
 .code__language-label{
