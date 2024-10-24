@@ -285,16 +285,17 @@ body.hide-header .header{
     object-fit: top center;
 }
 
-.chats .message--loading .message__avatar{
-    animation: rotate 3s linear infinite;
+.chats .message--loading .message__avatar {
+    animation: scaleUpDown 3s ease-in-out infinite;
 }
 
-@keyframes rotate {
-    
-    100%{
-        transform: rotate(360deg);
+@keyframes scaleUpDown {
+    0%, 100% {
+        transform: scale(1); /* Normal size */
     }
-
+    50% {
+        transform: scale(0.8); /* Smaller size */
+    }
 }
 
 .chats .message__icon{
