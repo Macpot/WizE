@@ -103,6 +103,7 @@ body.hide-header .header{
     -webkit-text-fill-color: transparent;
     font-size: 3.25rem;
     font-weight: 600;
+    line-height: 4rem;
 }
 
 .header__title h2{
