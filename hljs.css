@@ -38,6 +38,7 @@
 .hljs-deletion,
 .hljs-addition,
 .hljs-comment,
+.hljs-tag,
 .hljs-quote {
     font-family: inherit; /* Inherit the font */
     font-weight: 500; /* Set font weight to 500 */
