@@ -2,8 +2,6 @@ const messageForm = document.querySelector(".prompt__form");
 const chatHistoryContainer = document.querySelector(".chats");
 const suggestionItems = document.querySelectorAll(".suggests__item");
 const hljsThemeLink = document.getElementById("hljs-theme");
-
-
 const themeToggleButton = document.getElementById("themeToggler");
 const clearChatButton = document.getElementById("deleteButton");
 
@@ -22,31 +20,28 @@ const loadSavedChatHistory = () => {
     document.body.classList.toggle("light_mode", isLightTheme);
     themeToggleButton.innerHTML = isLightTheme ? '<i class="bx bx-moon"></i>' : '<i class="bx bx-sun"></i>';
 
+    // Set Highlight.js theme based on the page theme
+    setHighlightJsTheme(isLightTheme);
+
     chatHistoryContainer.innerHTML = '';
 
     // Iterate through saved chat history and display messages
     savedConversations.forEach(conversation => {
-        // Display the user's message
         const userMessageHtml = `
-
             <div class="message__content">
                 <img class="message__avatar" src="images/user.png" alt="User avatar">
-               <p class="message__text">${conversation.userMessage}</p>
+                <p class="message__text">${conversation.userMessage}</p>
             </div>
-        
         `;
 
         const outgoingMessageElement = createChatMessageElement(userMessageHtml, "message--outgoing");
         chatHistoryContainer.appendChild(outgoingMessageElement);
 
-        // Display the API response
         const responseText = conversation.apiResponse?.candidates?.[0]?.content?.parts?.[0]?.text;
-        const parsedApiResponse = marked.parse(responseText); // Convert to HTML
-        const rawApiResponse = responseText; // Plain text version
+        const parsedApiResponse = marked.parse(responseText);
 
         const responseHtml = `
-        
-           <div class="message__content">
+            <div class="message__content">
                 <img class="message__avatar" src="images/wize.svg" alt="Wize avatar">
                 <p class="message__text"></p>
                 <div class="message__loading-indicator hide">
@@ -55,8 +50,7 @@ const loadSavedChatHistory = () => {
                     <div class="message__loading-bar"></div>
                 </div>
             </div>
-            <span onClick="copyMessageToClipboard(this)" class="message__icon hide"><i class='bx bx-copy-alt'></i></span>
-        
+            <span onClick="copyMessageToClipboard(this)" class="message__icon hide"><i class='bx bx-copy'></i></span>
         `;
 
         const incomingMessageElement = createChatMessageElement(responseHtml, "message--incoming");
@@ -65,19 +59,26 @@ const loadSavedChatHistory = () => {
         const messageTextElement = incomingMessageElement.querySelector(".message__text");
 
         // Display saved chat without typing effect
-        showTypingEffect(rawApiResponse, parsedApiResponse, messageTextElement, incomingMessageElement, true); // 'true' skips typing
+        showTypingEffect(responseText, parsedApiResponse, messageTextElement, incomingMessageElement, true);
     });
 
     document.body.classList.toggle("hide-header", savedConversations.length > 0);
 };
 
-// create a new chat message element
+// Create a new chat message element
 const createChatMessageElement = (htmlContent, ...cssClasses) => {
     const messageElement = document.createElement("div");
     messageElement.classList.add("message", ...cssClasses);
     messageElement.innerHTML = htmlContent;
     return messageElement;
-}
+};
+
+// Set Highlight.js theme based on the current mode
+const setHighlightJsTheme = (isLightTheme) => {
+    hljsThemeLink.href = isLightTheme
+        ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" // Light theme
+        : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"; // Dark theme
+};
 
 // Show typing effect
 const showTypingEffect = (rawText, htmlText, messageElement, incomingMessageElement, skipEffect = false) => {
@@ -187,11 +188,9 @@ const addCopyButtonToCodeBlocks = () => {
     });
 };
 
-
 // Show loading animation during API request
 const displayLoadingAnimation = () => {
     const loadingHtml = `
-
         <div class="message__content">
             <img class="message__avatar" src="images/wize.svg" alt="Wize avatar">
             <p class="message__text"></p>
@@ -201,10 +200,8 @@ const displayLoadingAnimation = () => {
                 <div class="message__loading-bar"></div>
             </div>
         </div>
-        <span onClick="copyMessageToClipboard(this)" class="message__icon hide"><i class='bx bx-copy-alt'></i></span>
-    
+        <span onClick="copyMessageToClipboard(this)" class="message__icon hide"><i class='bx bx-copy'></i></span>
     `;
-
     const loadingMessageElement = createChatMessageElement(loadingHtml, "message--incoming", "message--loading");
     chatHistoryContainer.appendChild(loadingMessageElement);
 
@@ -217,7 +214,7 @@ const copyMessageToClipboard = (copyButton) => {
 
     navigator.clipboard.writeText(messageContent);
     copyButton.innerHTML = `<i class='bx bx-check'></i>`; // Confirmation icon
-    setTimeout(() => copyButton.innerHTML = `<i class='bx bx-copy-alt'></i>`, 1000); // Revert icon after 1 second
+    setTimeout(() => copyButton.innerHTML = `<i class='bx bx-copy'></i>`, 1000); // Revert icon after 1 second
 };
 
 // Handle sending chat messages
@@ -228,14 +225,11 @@ const handleOutgoingMessage = () => {
     isGeneratingResponse = true;
 
     const outgoingMessageHtml = `
-    
         <div class="message__content">
             <img class="message__avatar" src="images/user.png" alt="User avatar">
             <p class="message__text"></p>
         </div>
-
     `;
-
     const outgoingMessageElement = createChatMessageElement(outgoingMessageHtml, "message--outgoing");
     outgoingMessageElement.querySelector(".message__text").innerText = currentUserMessage;
     chatHistoryContainer.appendChild(outgoingMessageElement);
@@ -254,20 +248,16 @@ themeToggleButton.addEventListener('click', () => {
     const newIconClass = isLightTheme ? "bx bx-moon" : "bx bx-sun";
     themeToggleButton.querySelector("i").className = newIconClass;
 
-    // Change Highlight.js theme
-    hljsThemeLink.href = isLightTheme 
-        ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" // Light theme
-        : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"; // Dark theme
+    // Update Highlight.js theme based on current mode
+    setHighlightJsTheme(isLightTheme);
 });
 
 // Clear all chat history
 clearChatButton.addEventListener('click', () => {
     if (confirm("Are you sure you want to delete all chat history?")) {
         localStorage.removeItem("saved-api-chats");
-
         // Reload chat history to reflect changes
         loadSavedChatHistory();
-
         currentUserMessage = null;
         isGeneratingResponse = false;
     }
