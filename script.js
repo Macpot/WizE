@@ -150,16 +150,22 @@ const requestApiResponse = async (incomingMessageElement) => {
 
 // Add copy button to code blocks
 const addCopyButtonToCodeBlocks = () => {
+    // Remove previous copy buttons if they exist
+    const existingButtons = document.querySelectorAll('.code__copy-btn');
+    existingButtons.forEach(button => button.remove());
+
     const codeBlocks = document.querySelectorAll('pre');
     codeBlocks.forEach((block) => {
         const codeElement = block.querySelector('code');
         let language = [...codeElement.classList].find(cls => cls.startsWith('language-'))?.replace('language-', '') || 'Text';
 
+        // Language label
         const languageLabel = document.createElement('div');
         languageLabel.innerText = language.charAt(0).toUpperCase() + language.slice(1);
         languageLabel.classList.add('code__language-label');
         block.appendChild(languageLabel);
 
+        // Copy button
         const copyButton = document.createElement('button');
         copyButton.innerHTML = `<i class='bx bx-copy'></i>`;
         copyButton.classList.add('code__copy-btn');
@@ -168,7 +174,9 @@ const addCopyButtonToCodeBlocks = () => {
         copyButton.addEventListener('click', () => {
             navigator.clipboard.writeText(codeElement.innerText).then(() => {
                 copyButton.innerHTML = `<i class='bx bx-check'></i>`;
-                setTimeout(() => copyButton.innerHTML = `<i class='bx bx-copy'></i>`, 2000);
+                setTimeout(() => {
+                    copyButton.innerHTML = `<i class='bx bx-copy'></i>`;
+                }, 2000);
             }).catch(err => {
                 console.error("Copy failed:", err);
                 alert("Unable to copy text!");
@@ -176,6 +184,7 @@ const addCopyButtonToCodeBlocks = () => {
         });
     });
 };
+
 
 // Show loading animation during API request
 const displayLoadingAnimation = () => {
