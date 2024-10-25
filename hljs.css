@@ -16,6 +16,7 @@
 .hljs-comment,
 .hljs-function .hljs-title,
 .hljs-title,
+.hljs-emphasis,
 .hljs-name,
 .hljs-type,
 .hljs-number,
@@ -33,6 +34,7 @@
 .hljs-built_in,
 .hljs-builtin-name,
 .hljs-params,
+.hljs-strong,
 .hljs-deletion,
 .hljs-addition,
 .hljs-comment,
@@ -45,4 +47,3 @@ pre code.hljs {
     font-family: inherit; /* Inherit the font */
     font-weight: 500; /* Set font weight to 500 */
 }
-
