@@ -1,6 +1,8 @@
 const messageForm = document.querySelector(".prompt__form");
 const chatHistoryContainer = document.querySelector(".chats");
 const suggestionItems = document.querySelectorAll(".suggests__item");
+const hljsThemeLink = document.getElementById("hljs-theme");
+
 
 const themeToggleButton = document.getElementById("themeToggler");
 const clearChatButton = document.getElementById("deleteButton");
@@ -251,6 +253,11 @@ themeToggleButton.addEventListener('click', () => {
     // Update icon based on theme
     const newIconClass = isLightTheme ? "bx bx-moon" : "bx bx-sun";
     themeToggleButton.querySelector("i").className = newIconClass;
+
+    // Change Highlight.js theme
+    hljsThemeLink.href = isLightTheme 
+        ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" // Light theme
+        : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"; // Dark theme
 });
 
 // Clear all chat history
