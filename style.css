@@ -12,7 +12,9 @@
 :root{
     --primary-color: #131314;
     --secondary-color: #1E1F20;
+    --code-color: #0D0D0D;
     --secondary-hover-color: #333537;
+    --border-color: rgba(255, 255, 255, 0.1); 
   
     --focus-color: #282A2C;
     --focus-hover-color: #37393B;
@@ -28,7 +30,9 @@
 .light_mode{
     --primary-color: #FFFFFF;
     --secondary-color: #F0F4F9;
+    --code-color: #F0F4F9;
     --secondary-hover-color: #DDE3EA;
+    --border-color: rgba(0, 0, 0, 0.1); 
   
     --focus-color: #E9EEF6;
     --focus-hover-color: #E1E6ED;
@@ -66,6 +70,7 @@ body.hide-header .header{
     justify-content: space-between;
     padding: 1rem 2rem;
     background-color: var(--primary-color);
+    z-index: 1000;
 }
 
 .navbar__logo{
@@ -260,11 +265,19 @@ body.hide-header .header{
     width: 100%;
 }
 
-.chats .message__text{
+
+
+.chats .message__text {
     color: var(--text-color);
-    white-space: pre-wrap;
+    white-space: pre-wrap; /* Allows text to wrap and respects whitespace */
+    word-wrap: break-word; /* Breaks long words to prevent overflow */
     margin-top: 10px;
+    max-width: 87%; /* Adjusts to 90% of the parent container */
+    /* Alternatively, you can use viewport units */
+    /* max-width: 80vw; */
 }
+
+
 
 .hide{
     display: none !important;
@@ -369,7 +382,7 @@ body.hide-header .header{
     cursor: pointer;
     position: absolute;
     right: 10px;
-    top: 12px;
+    top: 10px;
     z-index: 10;
     font-size: 18px;
 }
@@ -407,7 +420,11 @@ td{
     padding: 10px;
 }
 
-pre{
+pre {
+    overflow: hidden; /* Ensure the container does not overflow */
+}
+
+pre {
     position: relative;
     background-color: var(--secondary-color);
     padding: 10px 0 0;
@@ -415,28 +432,34 @@ pre{
     font-size: 14px;
     border-radius: 10px;
     margin: 0;
-    overflow-x: auto;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    white-space: pre; /* Preserve whitespace and line breaks */
+    border: 1px solid var(--border-color);
 }
 
-code{
+
+code {
     margin-top: 30px;
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px; /* top right and top left are 0, bottom right and bottom left are 5px */
     color: inherit;
     font-family: inherit;
 }
 
+
 .code__language-label{
     position: absolute;
-    font-weight: bold;
-    top: 10px;
-    left: 12px;
+    top: 13px;
+    left: 13px;
     color: var(--placeholder-color);
     font-size: 14px;
     text-transform: capitalize;
+    font-family: ui-sans-serif, -apple-system, system-ui, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 0.75rem;
+    font-weight: 400;
 }
 
 .hljs{
-    background-color: var(--secondary-color);
+    background-color: var(--code-color);
 }
 
 blockquote{
