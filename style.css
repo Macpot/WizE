@@ -273,6 +273,7 @@ body.hide-header .header{
     word-wrap: break-word; /* Breaks long words to prevent overflow */
     margin-top: 10px;
     max-width: 87%; /* Adjusts to 90% of the parent container */
+    min-width: 87%; /* Adjusts to 90% of the parent container */
     /* Alternatively, you can use viewport units */
     /* max-width: 80vw; */
 }
