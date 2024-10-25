@@ -42,7 +42,7 @@
 .hljs-quote {
     font-family: inherit; /* Inherit the font */
     font-weight: 500; /* Set font weight to 500 */
-    line-height: 2rem;
+    line-height: 1.5rem;
 }
 
 pre code.hljs {
