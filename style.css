@@ -442,7 +442,6 @@ code {
     margin-top: 30px;
     border-radius: 0 0 5px 5px; /* top right and top left are 0, bottom right and bottom left are 5px */
     color: inherit;
-    font-family: inherit;
 }
 
 
