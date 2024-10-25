@@ -1,0 +1,48 @@
+/* Import your chosen font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+.hljs {
+    font-family: 'Roboto', sans-serif; /* Set the default font */
+    font-weight: 500; /* Set the default font weight */
+}
+
+/* Apply the same font and weight to all syntax elements */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-variable,
+.hljs-variable.language,
+.hljs-subst,
+.hljs-string,
+.hljs-comment,
+.hljs-function .hljs-title,
+.hljs-title,
+.hljs-name,
+.hljs-type,
+.hljs-number,
+.hljs-attribute,
+.hljs-literal,
+.hljs-class .hljs-title,
+.hljs-tag .hljs-title,
+.hljs-tag .hljs-name,
+.hljs-section,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-regexp,
+.hljs-meta,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-params,
+.hljs-deletion,
+.hljs-addition,
+.hljs-comment,
+.hljs-quote {
+    font-family: inherit; /* Inherit the font */
+    font-weight: 500; /* Set font weight to 500 */
+}
+
+pre code.hljs {
+    font-family: inherit; /* Inherit the font */
+    font-weight: 500; /* Set font weight to 500 */
+}
+
