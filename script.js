@@ -152,6 +152,7 @@ const requestApiResponse = async (incomingMessageElement) => {
 };
 
 // Add copy button to code blocks
+// Add copy button to code blocks
 const addCopyButtonToCodeBlocks = () => {
     // Remove previous copy buttons if they exist
     const existingButtons = document.querySelectorAll('.code__copy-btn');
@@ -162,11 +163,13 @@ const addCopyButtonToCodeBlocks = () => {
         const codeElement = block.querySelector('code');
         let language = [...codeElement.classList].find(cls => cls.startsWith('language-'))?.replace('language-', '') || 'Text';
 
-        // Language label
-        const languageLabel = document.createElement('div');
-        languageLabel.innerText = language.charAt(0).toUpperCase() + language.slice(1);
-        languageLabel.classList.add('code__language-label');
-        block.appendChild(languageLabel);
+        // Check if a language label already exists
+        if (!block.querySelector('.code__language-label')) {
+            const languageLabel = document.createElement('div');
+            languageLabel.innerText = language.charAt(0).toUpperCase() + language.slice(1);
+            languageLabel.classList.add('code__language-label');
+            block.appendChild(languageLabel);
+        }
 
         // Copy button
         const copyButton = document.createElement('button');
@@ -187,6 +190,7 @@ const addCopyButtonToCodeBlocks = () => {
         });
     });
 };
+
 
 // Show loading animation during API request
 const displayLoadingAnimation = () => {
