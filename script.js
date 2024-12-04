@@ -42,7 +42,7 @@ const loadSavedChatHistory = () => {
 
         const responseHtml = `
             <div class="message__content">
-                <img class="message__avatar" src="images/wize.svg" alt="Wize avatar">
+                <img class="message__avatar" src="images/wize.svg" alt="Dars avatar">
                 <p class="message__text"></p>
                 <div class="message__loading-indicator hide">
                     <div class="message__loading-bar"></div>
@@ -196,7 +196,7 @@ const addCopyButtonToCodeBlocks = () => {
 const displayLoadingAnimation = () => {
     const loadingHtml = `
         <div class="message__content">
-            <img class="message__avatar" src="images/wize.svg" alt="Wize avatar">
+            <img class="message__avatar" src="images/wize.svg" alt="Dars avatar">
             <p class="message__text"></p>
             <div class="message__loading-indicator">
                 <div class="message__loading-bar"></div>
