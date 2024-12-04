@@ -29,7 +29,7 @@ const loadSavedChatHistory = () => {
     savedConversations.forEach(conversation => {
         const userMessageHtml = `
             <div class="message__content">
-                <img class="message__avatar" src="images/user.png" alt="User avatar">
+                <img class="message__avatar" src="images/user.svg" alt="User avatar">
                 <p class="message__text">${conversation.userMessage}</p>
             </div>
         `;
@@ -230,7 +230,7 @@ const handleOutgoingMessage = () => {
 
     const outgoingMessageHtml = `
         <div class="message__content">
-            <img class="message__avatar" src="images/user.png" alt="User avatar">
+            <img class="message__avatar" src="images/user.svg" alt="User avatar">
             <p class="message__text"></p>
         </div>
     `;
