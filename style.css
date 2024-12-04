@@ -29,8 +29,8 @@
 
 .light_mode{
     --primary-color: #FFFFFF;
-    --secondary-color: #F0F4F9;
-    --code-color: #F0F4F9;
+    --secondary-color: #F9F9F9;
+    --code-color: #F9F9F9;
     --secondary-hover-color: #DDE3EA;
     --border-color: rgba(0, 0, 0, 0.1); 
   
