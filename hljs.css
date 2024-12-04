@@ -1,12 +1,15 @@
 /* Import your chosen font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
+/* Set the default font for all hljs elements */
 .hljs {
     font-family: 'Roboto', sans-serif; /* Set the default font */
     font-weight: 500; /* Set the default font weight */
+    line-height: 1.5rem; /* Optional: Control the line height */
 }
 
 /* Apply the same font and weight to all syntax elements */
+.hljs,
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-variable,
@@ -40,12 +43,14 @@
 .hljs-comment,
 .hljs-tag,
 .hljs-quote {
-    font-family: inherit; /* Inherit the font */
-    font-weight: 500; /* Set font weight to 500 */
-    line-height: 1.5rem;
+    font-family: inherit; /* Ensure inheritance of font family */
+    font-weight: inherit; /* Ensure inheritance of font weight */
+    line-height: inherit; /* Optional: Inherit the line height */
 }
 
+/* Style for pre and code blocks */
 pre code.hljs {
     font-family: inherit; /* Inherit the font */
-    font-weight: 500; /* Set font weight to 500 */
+    font-weight: inherit; /* Inherit the font weight */
+    line-height: inherit; /* Optional: Inherit line height */
 }
