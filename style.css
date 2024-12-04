@@ -69,8 +69,9 @@ body.hide-header .header{
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
-    background-color: var(--primary-color);
+    background-color: rgba(var(--primary-color));
     z-index: 1000;
+    backdrop-filter: blur(20px);
 }
 
 .navbar__logo{
