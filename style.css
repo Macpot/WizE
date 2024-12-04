@@ -168,7 +168,7 @@ body.hide-header .header{
     width: 100%;
     left: 0;
     bottom: 0;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 .prompt__input-wrapper{
@@ -242,7 +242,7 @@ body.hide-header .header{
     text-align: center;
     color: var(--placeholder-color);
     font-size: 0.85rem;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
 
 .chats{
@@ -267,6 +267,9 @@ body.hide-header .header{
     width: 100%;
 }
 
+p {
+    margin-bottom: 0 !important;
+}
 
 
 .chats .message__text {
@@ -507,5 +510,3 @@ blockquote{
     }
 
 }
-
-
