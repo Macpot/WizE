@@ -299,6 +299,7 @@ body.hide-header .header{
     object-fit: cover;
     border-radius: 50%;
     object-fit: top center;
+    border: 1px solid var(--border-color);
 }
 
 .chats .message--loading .message__avatar {
@@ -505,3 +506,5 @@ blockquote{
     }
 
 }
+
+
