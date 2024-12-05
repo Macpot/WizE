@@ -15,7 +15,7 @@ const API_REQUEST_URL = `https://generativelanguage.googleapis.com/v1/models/gem
 // Load saved data from local storage
 const loadSavedChatHistory = () => {
     const savedConversations = JSON.parse(localStorage.getItem("saved-api-chats")) || [];
-    chatHistoryContainer.innerHTML = ''; // Clear existing chat content
+    chatHistoryContainer.innerHTML = '';
 
     // Iterate through saved chat history and display messages
     savedConversations.forEach(conversation => {
@@ -54,7 +54,6 @@ const loadSavedChatHistory = () => {
 
     document.body.classList.toggle("hide-header", savedConversations.length > 0);
 };
-
 
 
 // Create a new chat message element
@@ -235,36 +234,6 @@ const handleOutgoingMessage = () => {
     setTimeout(displayLoadingAnimation, 500); // Show loading animation after delay
 };
 
-
-// Function to handle sending a message programmatically (for URL messages)
-const simulateSendingMessage = (message) => {
-    if (!message || isGeneratingResponse) return; // Exit if no message or already generating response
-
-    // Mark that we're generating a response
-    isGeneratingResponse = true;
-
-    // Simulate the outgoing message HTML and append it to the chat
-    const outgoingMessageHtml = `
-        <div class="message__content">
-            <img class="message__avatar" src="images/user.svg" alt="User avatar">
-            <p class="message__text">${message}</p>
-        </div>
-    `;
-    const outgoingMessageElement = createChatMessageElement(outgoingMessageHtml, "message--outgoing");
-    chatHistoryContainer.appendChild(outgoingMessageElement);
-
-    // Simulate clearing the input field (this may not be necessary here)
-    messageForm.reset(); 
-
-    // Optionally, trigger the loading animation and request the API response
-    document.body.classList.add("hide-header");
-    setTimeout(displayLoadingAnimation, 500); // Show loading animation after delay
-
-    // Now load the saved chat history after sending the message
-    loadSavedChatHistory();
-};
-
-
 // Automatically set theme based on system preference
 const setThemeBasedOnSystemPreference = () => {
     const isLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
@@ -331,21 +300,6 @@ messageForm.addEventListener('submit', (e) => {
     e.preventDefault();
     handleOutgoingMessage();
 });
-
-
-// Check for the URL message and send it
-const urlParams = new URLSearchParams(window.location.search);
-const messageFromUrl = urlParams.get('message');  // 'message' is the query parameter
-
-if (messageFromUrl) {
-    currentUserMessage = decodeURIComponent(messageFromUrl);  // Decode URL-encoded message
-    simulateSendingMessage(currentUserMessage);  // Send the message programmatically
-} else {
-    // If no message in URL, load saved history right away
-    loadSavedChatHistory();
-}
-
-
 
 // Load saved chat history on page load
 loadSavedChatHistory();
