@@ -53,4 +53,5 @@ pre code.hljs {
     font-family: inherit; /* Inherit the font */
     font-weight: inherit; /* Inherit the font weight */
     line-height: inherit; /* Optional: Inherit line height */
+    background-color: var(--primary-color);
 }
