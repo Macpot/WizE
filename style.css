@@ -7,7 +7,9 @@
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
     transition: background 0.3s ease;
+    scrollbar-color: var(--main-surface-tertiary) transparent;
 }
+
 
 :root{
     --primary-color: #131314;
@@ -27,6 +29,7 @@
     --heading-secondary-color: #444746;
     --placeholder-color: #ABAFB3;
     --navbar-opacity: 0.8; /* Adjustable opacity */
+    --main-surface-tertiary: #676767;
 }
 
 .light_mode{
@@ -439,15 +442,16 @@ pre {
 
 pre {
     position: relative;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     padding: 10px 0 0;
     font-family: monospace;
     font-size: 14px;
-    border-radius: 10px;
+    border-radius: 20px;
     margin: 0;
     overflow-x: auto; /* Allow horizontal scrolling */
     white-space: pre; /* Preserve whitespace and line breaks */
     border: 1px solid var(--border-color);
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 6px 14px 0px;
 }
 
 
@@ -518,3 +522,9 @@ blockquote{
 }
 
 
+pre code.hljs {
+    font-family: inherit; /* Inherit the font */
+    font-weight: inherit; /* Inherit the font weight */
+    line-height: inherit; /* Optional: Inherit line height */
+    background-color: var(--primary-color);
+}
