@@ -13,7 +13,7 @@
     --primary-color: #131314;
     --secondary-color: #1E1F20;
     --code-color: #0D0D0D;
-    --secondary-hover-color: #333537;
+    --secondary-hover-color: #1a1a1a;
     --border-color: rgba(255, 255, 255, 0.1); 
   
     --focus-color: #282A2C;
@@ -31,19 +31,19 @@
 
 .light_mode{
     --primary-color: #FFFFFF;
-    --secondary-color: #F9F9F9;
+    --secondary-color: #F4F4F4;
     --code-color: #F9F9F9;
-    --secondary-hover-color: #DDE3EA;
+    --secondary-hover-color: #F9F9F9;
     --border-color: rgba(0, 0, 0, 0.1); 
   
-    --focus-color: #f3f3f3;
+    --focus-color: #F4F4F4;
     --focus-hover-color: #f3f3f3;
   
     --button-hover-color: #E9ECF1;
   
     --text-color: #000;
     --light-text-color: #5D5D5D;
-    --text-secondary-color: #4D4D4D;
+    --text-secondary-color: #5d5d5d;
     --heading-secondary-color: #C4C7C5;
     --placeholder-color: #717075;
 }
@@ -163,15 +163,19 @@ body.hide-header .header{
     border-radius: 35%;
 }
 
-.prompt{
+.prompt {
     position: fixed;
     background: var(--primary-color);
     z-index: 1000;
     width: 100%;
     left: 0;
     bottom: 0;
-    padding: 0.5rem;
+    padding-top: 0; /* Remove top padding */
+    padding-left: 1rem; /* Retain left padding */
+    padding-right: 1rem; /* Retain right padding */
+    padding-bottom: 0.5rem; /* Retain bottom padding */
 }
+
 
 .prompt__input-wrapper{
     width: 100%;
@@ -244,7 +248,7 @@ body.hide-header .header{
     text-align: center;
     color: var(--placeholder-color);
     font-size: 0.85rem;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
 }
 
 .chats{
