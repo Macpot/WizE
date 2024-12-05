@@ -15,10 +15,10 @@ const API_REQUEST_URL = `https://generativelanguage.googleapis.com/v1/models/gem
 // Load saved data from local storage
 const loadSavedChatHistory = () => {
     const savedConversations = JSON.parse(localStorage.getItem("saved-api-chats")) || [];
-    chatHistoryContainer.innerHTML = '';
+    chatHistoryContainer.innerHTML = ''; // Clear the current chat history first (to avoid duplicates)
 
     savedConversations.forEach(conversation => {
-        // Create user message
+        // Create and display the user (outgoing) message
         const userMessageHtml = `
             <div class="message__content">
                 <img class="message__avatar" src="images/user.svg" alt="User avatar">
@@ -28,7 +28,7 @@ const loadSavedChatHistory = () => {
         const outgoingMessageElement = createChatMessageElement(userMessageHtml, "message--outgoing");
         chatHistoryContainer.appendChild(outgoingMessageElement);
 
-        // Create API response message (if available)
+        // If the bot's response exists, create and display it
         const responseText = conversation.apiResponse?.candidates?.[0]?.content?.parts?.[0]?.text;
         const parsedApiResponse = marked.parse(responseText);
 
@@ -50,13 +50,17 @@ const loadSavedChatHistory = () => {
 
         const messageTextElement = incomingMessageElement.querySelector(".message__text");
 
-        // Display saved chat response
+        // Display bot's response with typing effect
         showTypingEffect(responseText, parsedApiResponse, messageTextElement, incomingMessageElement, true);
     });
+
+    // Scroll to the bottom of the chat container
+    chatHistoryContainer.scrollTop = chatHistoryContainer.scrollHeight;
 
     // Hide the header if there are saved conversations
     document.body.classList.toggle("hide-header", savedConversations.length > 0);
 };
+
 
 
 
@@ -229,22 +233,25 @@ const handleOutgoingMessage = () => {
     const outgoingMessageHtml = `
         <div class="message__content">
             <img class="message__avatar" src="images/user.svg" alt="User avatar">
-            <p class="message__text"></p>
+            <p class="message__text">${currentUserMessage}</p>
         </div>
     `;
     const outgoingMessageElement = createChatMessageElement(outgoingMessageHtml, "message--outgoing");
-    outgoingMessageElement.querySelector(".message__text").innerText = currentUserMessage;
-
-    // Append the outgoing message to the chat container
+    
+    // Immediately append the outgoing message to the chat container
     chatHistoryContainer.appendChild(outgoingMessageElement);
 
-    // Reset the message form input field
+    // Scroll to the bottom of the chat container
+    chatHistoryContainer.scrollTop = chatHistoryContainer.scrollHeight;
+
+    // Clear the input field
     messageForm.reset();
     document.body.classList.add("hide-header");
 
-    // Set a delay before showing the loading animation and API request
+    // Show loading animation and call API after a short delay
     setTimeout(displayLoadingAnimation, 500); // Show loading animation after delay
 };
+
 
 
 
