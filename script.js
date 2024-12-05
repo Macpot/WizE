@@ -68,7 +68,7 @@ const createChatMessageElement = (htmlContent, ...cssClasses) => {
 const setHighlightJsTheme = (isLightTheme) => {
     hljsThemeLink.href = isLightTheme
         ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" // Light theme
-: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai.min.css";
+: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css";
 };
 
 // Show typing effect
