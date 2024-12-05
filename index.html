@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link id="favicon" rel="icon" href="images/favicon.svg" type="image/svg+xml">
     <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="hljs.css">
-
 
     <title>Juno</title>
 </head>
@@ -18,7 +17,6 @@
 
     <nav class="navbar">
         <h3 class="navbar__logo">Juno</h3>
-        <button class="navbar__button" id="themeToggler"><i class='bx bx-sun'></i></button>
     </nav>
 
     <header class="header">
@@ -81,11 +79,31 @@
         </p>
     </section>
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="script.js"></script>
+
+    <script>
+        // Function to update the favicon based on the user's theme preference
+        function updateFavicon() {
+            const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const favicon = document.getElementById('favicon');
+
+            // Change favicon based on dark mode or light mode
+            if (isDarkMode) {
+                favicon.setAttribute('href', 'images/favicondark.svg');
+            } else {
+                favicon.setAttribute('href', 'images/favicon.svg');
+            }
+        }
+
+        // Initially update the favicon on page load
+        updateFavicon();
+
+        // Listen for changes to the user's theme preference
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
+    </script>
+
 </body>
 
 </html>
