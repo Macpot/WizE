@@ -361,7 +361,7 @@ p {
     width: 100%;
     border-radius: 0.135rem;
     background-position: -800px 0;
-    background: linear-gradient(to right, #ffffff60 30%, var(--primary-color) 60%, #ffffff60);
+    background: linear-gradient(to right, #0072ff60 30%, var(--primary-color) 60%, #0072ff60);
     animation: loading 3s linear infinite;
 }
 
