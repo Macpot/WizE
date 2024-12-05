@@ -234,6 +234,7 @@ const handleOutgoingMessage = () => {
     setTimeout(displayLoadingAnimation, 500); // Show loading animation after delay
 };
 
+
 // Automatically set theme based on system preference
 const setThemeBasedOnSystemPreference = () => {
     const isLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
@@ -300,6 +301,17 @@ messageForm.addEventListener('submit', (e) => {
     e.preventDefault();
     handleOutgoingMessage();
 });
+
+
+// Check URL for a query parameter and send that as a message
+const urlParams = new URLSearchParams(window.location.search);
+const messageFromUrl = urlParams.get('message');  // 'message' is the query parameter
+
+if (messageFromUrl) {
+    currentUserMessage = decodeURIComponent(messageFromUrl);  // Decode URL-encoded message
+    handleOutgoingMessage();  // Send the message programmatically
+}
+
 
 // Load saved chat history on page load
 loadSavedChatHistory();
