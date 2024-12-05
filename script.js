@@ -15,14 +15,6 @@ const API_REQUEST_URL = `https://generativelanguage.googleapis.com/v1/models/gem
 // Load saved data from local storage
 const loadSavedChatHistory = () => {
     const savedConversations = JSON.parse(localStorage.getItem("saved-api-chats")) || [];
-    const isLightTheme = localStorage.getItem("themeColor") === "light_mode";
-
-    document.body.classList.toggle("light_mode", isLightTheme);
-    themeToggleButton.innerHTML = isLightTheme ? '<i class="bx bx-moon"></i>' : '<i class="bx bx-sun"></i>';
-
-    // Set Highlight.js theme based on the page theme
-    setHighlightJsTheme(isLightTheme);
-
     chatHistoryContainer.innerHTML = '';
 
     // Iterate through saved chat history and display messages
@@ -33,7 +25,6 @@ const loadSavedChatHistory = () => {
                 <p class="message__text">${conversation.userMessage}</p>
             </div>
         `;
-
         const outgoingMessageElement = createChatMessageElement(userMessageHtml, "message--outgoing");
         chatHistoryContainer.appendChild(outgoingMessageElement);
 
@@ -52,7 +43,6 @@ const loadSavedChatHistory = () => {
             </div>
             <span onClick="copyMessageToClipboard(this)" class="message__icon hide"><i class='bx bx-copy'></i></span>
         `;
-
         const incomingMessageElement = createChatMessageElement(responseHtml, "message--incoming");
         chatHistoryContainer.appendChild(incomingMessageElement);
 
@@ -64,6 +54,7 @@ const loadSavedChatHistory = () => {
 
     document.body.classList.toggle("hide-header", savedConversations.length > 0);
 };
+
 
 // Create a new chat message element
 const createChatMessageElement = (htmlContent, ...cssClasses) => {
@@ -243,18 +234,33 @@ const handleOutgoingMessage = () => {
     setTimeout(displayLoadingAnimation, 500); // Show loading animation after delay
 };
 
-// Toggle between light and dark themes
-themeToggleButton.addEventListener('click', () => {
-    const isLightTheme = document.body.classList.toggle("light_mode");
-    localStorage.setItem("themeColor", isLightTheme ? "light_mode" : "dark_mode");
+// Automatically set theme based on system preference
+const setThemeBasedOnSystemPreference = () => {
+    const isLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
 
-    // Update icon based on theme
-    const newIconClass = isLightTheme ? "bx bx-moon" : "bx bx-sun";
-    themeToggleButton.querySelector("i").className = newIconClass;
-
-    // Update Highlight.js theme based on current mode
+    // Apply theme
+    document.body.classList.toggle("light_mode", isLightTheme);
+    // Set Highlight.js theme based on the current mode
     setHighlightJsTheme(isLightTheme);
+
+    // Save the theme preference in localStorage
+    localStorage.setItem("themeColor", isLightTheme ? "light_mode" : "dark_mode");
+};
+
+// Listen for system theme changes
+const themeMediaQuery = window.matchMedia("(prefers-color-scheme: light)");
+themeMediaQuery.addEventListener("change", () => {
+    const isLightTheme = themeMediaQuery.matches;
+    document.body.classList.toggle("light_mode", isLightTheme);
+    setHighlightJsTheme(isLightTheme);
+
+    // Update the theme preference in localStorage
+    localStorage.setItem("themeColor", isLightTheme ? "light_mode" : "dark_mode");
 });
+
+// Set the initial theme based on system preference when the page loads
+setThemeBasedOnSystemPreference();
+
 
 // Clear all chat history
 clearChatButton.addEventListener('click', () => {
