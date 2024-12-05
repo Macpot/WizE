@@ -15,7 +15,7 @@ const API_REQUEST_URL = `https://generativelanguage.googleapis.com/v1/models/gem
 // Load saved data from local storage
 const loadSavedChatHistory = () => {
     const savedConversations = JSON.parse(localStorage.getItem("saved-api-chats")) || [];
-    chatHistoryContainer.innerHTML = '';
+    chatHistoryContainer.innerHTML = ''; // Clear existing chat content
 
     // Iterate through saved chat history and display messages
     savedConversations.forEach(conversation => {
@@ -54,6 +54,7 @@ const loadSavedChatHistory = () => {
 
     document.body.classList.toggle("hide-header", savedConversations.length > 0);
 };
+
 
 
 // Create a new chat message element
@@ -235,6 +236,7 @@ const handleOutgoingMessage = () => {
 };
 
 
+// Function to handle sending a message programmatically (for URL messages)
 const simulateSendingMessage = (message) => {
     if (!message || isGeneratingResponse) return; // Exit if no message or already generating response
 
@@ -251,12 +253,15 @@ const simulateSendingMessage = (message) => {
     const outgoingMessageElement = createChatMessageElement(outgoingMessageHtml, "message--outgoing");
     chatHistoryContainer.appendChild(outgoingMessageElement);
 
-    // Simulate clearing the input field
+    // Simulate clearing the input field (this may not be necessary here)
     messageForm.reset(); 
 
     // Optionally, trigger the loading animation and request the API response
     document.body.classList.add("hide-header");
     setTimeout(displayLoadingAnimation, 500); // Show loading animation after delay
+
+    // Now load the saved chat history after sending the message
+    loadSavedChatHistory();
 };
 
 
@@ -327,13 +332,17 @@ messageForm.addEventListener('submit', (e) => {
     handleOutgoingMessage();
 });
 
-// Check URL for a query parameter and send that as a message
+
+// Check for the URL message and send it
 const urlParams = new URLSearchParams(window.location.search);
 const messageFromUrl = urlParams.get('message');  // 'message' is the query parameter
 
 if (messageFromUrl) {
     currentUserMessage = decodeURIComponent(messageFromUrl);  // Decode URL-encoded message
-    simulateSendingMessage(currentUserMessage);  // Simulate sending the message programmatically
+    simulateSendingMessage(currentUserMessage);  // Send the message programmatically
+} else {
+    // If no message in URL, load saved history right away
+    loadSavedChatHistory();
 }
 
 
