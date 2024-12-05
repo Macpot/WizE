@@ -17,8 +17,8 @@ const loadSavedChatHistory = () => {
     const savedConversations = JSON.parse(localStorage.getItem("saved-api-chats")) || [];
     chatHistoryContainer.innerHTML = '';
 
-    // Iterate through saved chat history and display messages
     savedConversations.forEach(conversation => {
+        // Create user message
         const userMessageHtml = `
             <div class="message__content">
                 <img class="message__avatar" src="images/user.svg" alt="User avatar">
@@ -28,6 +28,7 @@ const loadSavedChatHistory = () => {
         const outgoingMessageElement = createChatMessageElement(userMessageHtml, "message--outgoing");
         chatHistoryContainer.appendChild(outgoingMessageElement);
 
+        // Create API response message (if available)
         const responseText = conversation.apiResponse?.candidates?.[0]?.content?.parts?.[0]?.text;
         const parsedApiResponse = marked.parse(responseText);
 
@@ -43,17 +44,20 @@ const loadSavedChatHistory = () => {
             </div>
             <span onClick="copyMessageToClipboard(this)" class="message__icon hide"><i class='bx bx-copy'></i></span>
         `;
+
         const incomingMessageElement = createChatMessageElement(responseHtml, "message--incoming");
         chatHistoryContainer.appendChild(incomingMessageElement);
 
         const messageTextElement = incomingMessageElement.querySelector(".message__text");
 
-        // Display saved chat without typing effect
+        // Display saved chat response
         showTypingEffect(responseText, parsedApiResponse, messageTextElement, incomingMessageElement, true);
     });
 
+    // Hide the header if there are saved conversations
     document.body.classList.toggle("hide-header", savedConversations.length > 0);
 };
+
 
 
 // Create a new chat message element
@@ -214,11 +218,14 @@ const copyMessageToClipboard = (copyButton) => {
 
 // Handle sending chat messages
 const handleOutgoingMessage = () => {
+    // Get the current message text
     currentUserMessage = messageForm.querySelector(".prompt__form-input").value.trim() || currentUserMessage;
+
     if (!currentUserMessage || isGeneratingResponse) return; // Exit if no message or already generating response
 
     isGeneratingResponse = true;
 
+    // Create outgoing message HTML
     const outgoingMessageHtml = `
         <div class="message__content">
             <img class="message__avatar" src="images/user.svg" alt="User avatar">
@@ -227,12 +234,18 @@ const handleOutgoingMessage = () => {
     `;
     const outgoingMessageElement = createChatMessageElement(outgoingMessageHtml, "message--outgoing");
     outgoingMessageElement.querySelector(".message__text").innerText = currentUserMessage;
+
+    // Append the outgoing message to the chat container
     chatHistoryContainer.appendChild(outgoingMessageElement);
 
-    messageForm.reset(); // Clear input field
+    // Reset the message form input field
+    messageForm.reset();
     document.body.classList.add("hide-header");
+
+    // Set a delay before showing the loading animation and API request
     setTimeout(displayLoadingAnimation, 500); // Show loading animation after delay
 };
+
 
 
 // Automatically set theme based on system preference
