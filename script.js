@@ -302,3 +302,18 @@ messageForm.addEventListener('submit', (e) => {
 
 // Load saved chat history on page load
 loadSavedChatHistory();
+
+
+// JavaScript to check height and apply the class dynamically
+window.addEventListener('load', function() {
+    // Get all the <pre> elements
+    const pres = document.querySelectorAll('pre');
+    
+    pres.forEach(pre => {
+        // Check if the height of the <pre> element is 50rem or more
+        if (pre.offsetHeight >= 20 * 16) {  // 50rem * 16px per rem
+            // If so, add the class to apply the gradient
+            pre.classList.add('apply-gradient');
+        }
+    });
+});
