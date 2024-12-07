@@ -7,7 +7,8 @@
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
     transition: background 0.3s ease;
-    transition: color 0.05s ease;
+    transition: color 0.3s ease;
+    transition: border 0.3s ease;
 }
 
 * {
@@ -20,6 +21,8 @@
     --code-color: #2F2F2F;
     --secondary-hover-color: #2F2F2F;
     --border-color: rgba(255, 255, 255, 0.1); 
+    --border-hover-color: rgba(255, 255, 255, 0.2); 
+
   
     --focus-color: #2F2F2F;
     --focus-hover-color: #444444;
@@ -44,6 +47,8 @@
     --code-color: #FFFFFF;
     --secondary-hover-color: #F9F9F9;
     --border-color: rgba(0, 0, 0, 0.1); 
+    --border-hover-color: rgba(0, 0, 0, 0.2); 
+
   
     --focus-color: #F4F4F4;
     --focus-hover-color: #f3f3f3;
@@ -412,6 +417,7 @@ p {
     top: 10px;
     z-index: 10;
     font-size: 18px;
+    transition: color 0.2s ease;
 }
 
 .code__copy-btn:hover{
@@ -458,17 +464,38 @@ pre {
 
 pre {
     position: relative;
-    background-color: var(--code-color);
+    background-color: var(--code-color); /* Set the background color of pre */
     padding: 10px 0 0;
     font-family: monospace;
     font-size: 14px;
     border-radius: 20px;
     margin: 0;
-    overflow-x: auto; /* Allow horizontal scrolling */
-    white-space: pre; /* Preserve whitespace and line breaks */
+    overflow-x: auto;
+    white-space: pre;
     border: 1px solid var(--border-color);
     box-shadow: rgba(0, 0, 0, 0.04) 0px 6px 14px 0px;
 }
+
+/* Hover effect for all <pre> elements */
+pre:hover {
+    border: 1px solid var(--border-hover-color);
+}
+
+/* Apply the gradient only when the .apply-gradient class is added */
+pre.apply-gradient::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent calc(100% - 8rem), var(--code-color) 100%);
+    border-radius: 20px;  /* Match the parent border-radius */
+    pointer-events: none; /* Prevent the overlay from blocking interaction */
+    z-index: 1; /* Ensure the overlay is above the pre content */
+}
+
+
 
 
 code {
