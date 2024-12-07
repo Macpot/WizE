@@ -7,6 +7,7 @@
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
     transition: background 0.3s ease;
+    transition: color 0.05s ease;
 }
 
 * {
@@ -14,22 +15,24 @@
 }
 
 :root{
-    --primary-color: #131314;
-    --secondary-color: #1E1F20;
-    --code-color: #0D0D0D;
-    --secondary-hover-color: #1a1a1a;
+    --primary-color: #212121;
+    --secondary-color: #2F2F2F;
+    --code-color: #2F2F2F;
+    --secondary-hover-color: #2F2F2F;
     --border-color: rgba(255, 255, 255, 0.1); 
   
-    --focus-color: #282A2C;
-    --focus-hover-color: #37393B;
+    --focus-color: #2F2F2F;
+    --focus-hover-color: #444444;
   
-    --button-hover-color: #2f3030;
+    --button-hover-color: #2e2e2e;
   
+    --code-copy-color-hover: #E3E3E3;
+    --code-copy-color: #A2A2A2;
     --text-color: #fff;
     --light-text-color: #B4B4B4;
     --text-secondary-color: #b4b4b4;
-    --heading-secondary-color: #444746;
-    --placeholder-color: #ABAFB3;
+    --heading-secondary-color: #494949;
+    --placeholder-color: #b5b5b5;
     --navbar-opacity: 0.8; /* Adjustable opacity */
     --main-surface-tertiary: #676767;
 
@@ -38,7 +41,7 @@
 .light_mode{
     --primary-color: #FFFFFF;
     --secondary-color: #F4F4F4;
-    --code-color: #F9F9F9;
+    --code-color: #FFFFFF;
     --secondary-hover-color: #F9F9F9;
     --border-color: rgba(0, 0, 0, 0.1); 
   
@@ -47,6 +50,8 @@
   
     --button-hover-color: #E9ECF1;
   
+    --code-copy-color: #979797;
+    --code-copy-color-hover: #5D5D5D;
     --text-color: #000;
     --light-text-color: #5D5D5D;
     --text-secondary-color: #5d5d5d;
@@ -201,7 +206,7 @@ body.hide-header .header{
     font-size: 1rem;
     color: var(--text-color);
     padding: 1rem 1.75rem;
-    border-radius: 100px;
+    border-radius: 1.5rem;
     background: var(--secondary-color);
     transition: background 0.3s ease;
 }
@@ -399,7 +404,7 @@ p {
 .code__copy-btn{
     background-color: transparent;
     border: none;
-    color: var(--text-color);
+    color: var(--code-copy-color);
     border-radius: 5px;
     cursor: pointer;
     position: absolute;
@@ -407,6 +412,11 @@ p {
     top: 10px;
     z-index: 10;
     font-size: 18px;
+}
+
+.code__copy-btn:hover{
+
+    color: var(--code-copy-color-hover);
 }
 
 p{
@@ -448,7 +458,7 @@ pre {
 
 pre {
     position: relative;
-    background-color: var(--primary-color);
+    background-color: var(--code-color);
     padding: 10px 0 0;
     font-family: monospace;
     font-size: 14px;
@@ -532,5 +542,7 @@ pre code.hljs {
     font-family: inherit; /* Inherit the font */
     font-weight: inherit; /* Inherit the font weight */
     line-height: inherit; /* Optional: Inherit line height */
-    background-color: var(--primary-color);
+    background-color: var(--code-color);
 }
+
+
