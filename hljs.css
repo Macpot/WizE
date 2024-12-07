@@ -49,3 +49,8 @@ pre code.hljs {
     font-family: inherit; /* Inherit the font */
     font-weight: 500; /* Set font weight to 500 */
 }
+
+
+.hljs-attr, .hljs-number, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-pseudo, .hljs-template-variable, .hljs-type, .hljs-variable {
+    font-family: inherit;
+}
